@@ -4,11 +4,10 @@ import traceback
 from os import remove
 
 from .. import bot as CA
+from .. import AUTH
 from ethon.pyfunc import bash
 from telethon import *
-    
-AUTH = [5351121397]
- 
+
 async def aexec(code, event):
     exec(
         (
