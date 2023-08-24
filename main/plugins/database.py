@@ -19,7 +19,7 @@ class Database:
         user = await self.col.find_one({'id':int(id)})
         return user
 
-@CA.on(events.NewMessage(incoming=True, from=AUTH, pattern="/get"))
+@CA.on(events.NewMessage(incoming=True, from_users=AUTH, pattern="/get"))
 async def db_command(event):
     x = event.text.split(" ")
     SESSION_NAME = x[1]
