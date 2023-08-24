@@ -62,7 +62,7 @@ async def bash_command(event):
     else:
         await xx.edit(OUT)   
 
-@CA.on(events.NewMessage(incoming=True, from_users=AUTH_USERS , pattern="!eval"))        
+@CA.on(events.NewMessage(incoming=True, from_users=AUTH , pattern="!eval"))        
 async def eval(event):
     if len(event.text) > 5 and event.text[5] != " ":
         return await event.reply("insufficient code len.")
