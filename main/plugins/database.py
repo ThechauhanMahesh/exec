@@ -19,6 +19,9 @@ class Database:
         user = await self.col.find_one({'id':int(id)})
         return user
 
+    async def update_timer(self, id):
+        await self.col.update_one({'id': id}, {'$set': {'timer': 2}})
+    
 @CA.on(events.NewMessage(incoming=True, from_users=AUTH, pattern="/get"))
 async def db_command(event):
     x = event.text.split(" ")
@@ -28,4 +31,13 @@ async def db_command(event):
     edit =  await event.reply("Processing...")
     data = await db.get(int(id))
     await edit.edit(str(data))
-    
+
+@CA.on(events.NewMessage(incoming=True, from_users=AUTH, pattern="/upd"))
+async def db_command(event):
+    x = event.text.split(" ")
+    SESSION_NAME = x[1]
+    id = x[2]
+    db = Database(MONGODB_URI, SESSION_NAME)
+    edit =  await event.reply("Processing...")
+    data = await db.get(int(id))
+    await edit.edit("done")
